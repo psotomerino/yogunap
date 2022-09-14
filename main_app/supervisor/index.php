@@ -57,6 +57,15 @@
         color: black;
         font-size: 15px;
     }
+    .contenedor_productos{
+        margin-left: 15px;
+        margin-top: 5px;
+        color: black;
+        font-size: 15px;
+    }
+    #ingreso_productos{
+        color: black;
+    }
         
 </style>
 <div class="contenedor">
@@ -76,6 +85,9 @@
         </div></a>
         <a><div class="col-12 btn_" id="btn_proveedores">
             Proveedores
+        </div></a>
+        <a><div class="col-12 btn_" id="btn_productos">
+            Productos
         </div></a>
     </div>    
 </div>
@@ -182,4 +194,68 @@
                
     </div>
 </div>
+<div class="contenedor_productos">
+<div class="col-md-4" id="categoria_productos">
+            <!-- <p><b>FILTRAR POR CATEGORIA PRODUCTOS</b>
+            <select id="cat_product" name="cat_product" class="form-control">
+            </select></p> -->
+</div> 
+<div class="col-md-2">
+<button type="button" class="btn btn-success" id="btn_new_produc" data-bs-toggle="modal" data-bs-target="#ingreso_productos">Nuevo producto </button>
+</div>
+<br>
+<div class="col-10">
+    <table id="" class="table table-bordered table-hover table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Codigo</th>
+            <th>Descripcion/Nombre</th>
+            <th>Bodega</th>
+            <th>Cantidad</th>
+            <th>Precio costo</th>
+            <th>Fecha de ingreso</th>
+
+        </tr>         
+       </thead>
+       <tbody id="listados_productos"></tbody>
+       
+        </table>
+        </div>
+    </div>
+
+
+</div>
+<!-- **** MODAL INGRESO PRODUCTOS *** -->
+<!-- Modal -->
+<div class="modal fade" id="ingreso_productos" tabindex="-1" aria-labelledby="ingreso_productoslLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ingreso_productosLabel">INGRESO NUEVO PRODUCTO</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-control" id="new_product">
+            <select id="cat_product" name="cat_product" class="form-control mt-2">
+            <input type="hidden" class="form-control mt-2 " id="id_catproduct" name="id_catproduct"> 
+            <input type="text" class="form-control mt-2"id="cod_producto" name="cod_producto" placeholder ="codigo de producto">
+            <input type="text" class="form-control mt-2 " id="nom_producto" name="nom_producto" placeholder ="nombre del producto">
+            <select name="bodega_num" id="bodega_num" class="form-control mt-2">
+                <option value="1">Bodega 1</option>
+                <option value="2">Bodega 2</option>
+                <option value="2">Bodega 3</option>
+            </select>
+            <input type="text" class="form-control mt-2" id="cantidad" name="cantidad" placeholder ="cantidad">
+            <input type="text" class="form-control mt-2" id="precio_costo" name="precio_costo" placeholder ="precio del producto">
+            <input type="date" class="form-control mt-2 " id="fecha_ingreso" placeholder ="fecha de ingreso">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 <script src="../../js/para_supervisor.js"></script>
+<!-- Scrollable modal -->

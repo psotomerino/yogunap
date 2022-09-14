@@ -1,7 +1,8 @@
 jQuery(document).ready(function(){
-
+    productos_categoria();
     $('.contenedor_2').hide();
     $('.contenedor_categorias').hide();
+    $('.contenedor_productos').hide();
     
      $(document).on('click','#btn_yo', function(){
         
@@ -59,8 +60,8 @@ jQuery(document).ready(function(){
         $(".contenedor_1").fadeOut(1000);
         },1000);*/
         setTimeout(function() {
-        $(".contenedor_0").fadeIn(1000);
-        },1000);
+        $(".contenedor_0").fadeIn(700);
+        },700);
         $('.contenedor_2').hide();
         $('.contenedor_1').hide();
         
@@ -74,11 +75,85 @@ jQuery(document).ready(function(){
         $('.contenedor_categorias').hide();
             
     })
-    $(document).on('click','#btn_categorias', function(){
-        
+    $(document).on('click','#btn_categorias', function(){        
         $('.contenedor_categorias').show();
+        $('.contenedor_productos').hide();
     })
+    $(document).on('click','#btn_proveedores', function(){        
+        $('.contenedor_categorias').hide();
+        $('.contenedor_productos').hide();
+    })
+    $(document).on('click','#btn_productos', function(){        
+        $('.contenedor_categorias').hide();
+        $('.contenedor_productos').show();
+    })
+//*** crear categorias de productos */
+$(document).on('click','#crea_cat',function(e){
+    e.preventDefault();
+    var _formP = $("#form_categoria");      
+    var datos = new FormData($("#form_categoria")[0]);                
+      $.ajax({
+         url: '../../backend/inserta_catergoria_produc.php',
+         type: 'POST',
+         data: datos,
+         contentType: false,
+         processData: false,
+         success: function(datos)
+         {
+           alert(datos);
+           _formP[0].reset();
+           productos_categoria();
     
+         }
+
+        });
+})
+//**Crud categorias productos */
+function productos_categoria(){
+    $.ajax({
+      url: '../../backend/crud_catproducts.php',
+      type: 'POST',      
+    })
+    .done(function(listas_products_catego){
+    var i = 1;  
+    var listas = JSON.parse(listas_products_catego);
+    var template='';
+    listas.forEach(lista =>{
+            template+= `
+            <tr elmentoid="${lista.id_catproduct}">
+
+               <td>${i++}</td>                   
+               <td>${lista.nombre_categ}</td>
+               <td> <i class='bx bx-edit-alt'id="editar_usu"></i> &nbsp;
+                    <i class='bx bxs-user-x' id="borrar_usu"></i> 
+               </td>   
+                
+            </tr>`;                
+            $('#listados_categoria').html(template);
+           
+          });
+    /*$('#tot_plan').html(i);   
+    console.log (listas);
+    console.log (i);*/   
+    })
+    .fail(function(){
+      alert('Hubo un errror al cargar los usuarios');
+    });  
+
+}
+//***** Cargar categoirias productos********
+$.ajax({
+  type: 'POST',
+  url: '../../backend/carga_catproducts.php',
+  })
+  .done(function(listas_categorias_product){
+      //alert (listas_materias);  
+      $('#cat_product').html(listas_categorias_product); 
+      
+  })
+  .fail(function(){
+      alert ('hubo un error al cargar la lista de categorias de productos ');
+  })
     
 
 //*******FIN DE TODO******    
