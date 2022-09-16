@@ -31,6 +31,12 @@
         color: black;
         
     }
+    .contenedor_productos{
+        margin-top: 20px;
+        width: 80%;
+        float: left;
+        color: black; 
+    }
     #mi_clave{
         color: orangered;
     }
@@ -114,5 +120,32 @@
             </tr>
         </table>
     </div>
+</div>
+<div class="contenedor_productos">
+<div class="col-md-4" id="categoria_productos">
+            <!-- <p><b>FILTRAR POR CATEGORIA PRODUCTOS</b>
+            <select id="cat_product" name="cat_product" class="form-control">
+            </select></p> -->
+</div> 
+<div class="col-md-2">
+<!-- <button type="button" class="btn btn-success" id="btn_new_produc" data-bs-toggle="" data-bs-target="#ingreso_productos">Nuevo producto </button> -->
+</div>
+<br>
+<div class="col-10">
+    <table id="" class="table table-bordered table-hover table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Codigo</th>
+            <th>Descripcion/Nombre</th>            
+            <th>Cantidad</th>
+        </tr>         
+       </thead>
+       <tbody id="listados_productos"></tbody>
+       
+        </table>
+        </div>
+    </div>
+
+
 </div>
 <script src="../../js/para_bodega.js"></script>

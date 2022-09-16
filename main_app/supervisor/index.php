@@ -201,7 +201,7 @@
             </select></p> -->
 </div> 
 <div class="col-md-2">
-<button type="button" class="btn btn-success" id="btn_new_produc" data-bs-toggle="modal" data-bs-target="#ingreso_productos">Nuevo producto </button>
+<button type="button" class="btn btn-success" id="btn_new_produc" data-bs-toggle="" data-bs-target="#ingreso_productos">Nuevo producto </button>
 </div>
 <br>
 <div class="col-10">
@@ -214,6 +214,7 @@
             <th>Cantidad</th>
             <th>Precio costo</th>
             <th>Fecha de ingreso</th>
+            <th>Acciones</th>
 
         </tr>         
        </thead>
@@ -237,7 +238,7 @@
       <div class="modal-body">
         <form class="form-control" id="new_product">
             <select id="cat_product" name="cat_product" class="form-control mt-2">
-            <input type="hidden" class="form-control mt-2 " id="id_catproduct" name="id_catproduct"> 
+            <input type="hidden" class="form-control mt-2 " id="id_catproduct" name="id_catproduct" placeholder="id_catproducto "> 
             <input type="text" class="form-control mt-2"id="cod_producto" name="cod_producto" placeholder ="codigo de producto">
             <input type="text" class="form-control mt-2 " id="nom_producto" name="nom_producto" placeholder ="nombre del producto">
             <select name="bodega_num" id="bodega_num" class="form-control mt-2">
@@ -245,14 +246,14 @@
                 <option value="2">Bodega 2</option>
                 <option value="2">Bodega 3</option>
             </select>
-            <input type="text" class="form-control mt-2" id="cantidad" name="cantidad" placeholder ="cantidad">
+            <input type="number" class="form-control mt-2" id="cantidad" name="cantidad" placeholder ="cantidad">
             <input type="text" class="form-control mt-2" id="precio_costo" name="precio_costo" placeholder ="precio del producto">
-            <input type="date" class="form-control mt-2 " id="fecha_ingreso" placeholder ="fecha de ingreso">
+            <input type="text" class="form-control mt-2 " id="fecha_ingreso" name="fecha_ingreso" readonly >
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <button type="button" class="btn btn-success" id="carga_producto_">CARGAR PRODUCTO</button> 
       </div>
     </div>
   </div>

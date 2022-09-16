@@ -1,6 +1,8 @@
 jQuery(document).ready(function(){
 
     $('.contenedor_2').hide();
+    //$('.contenedor_productos').hide();
+    crud_productos();
     
      $(document).on('click','#btn_yo', function(){
         
@@ -57,6 +59,37 @@ jQuery(document).ready(function(){
         $('.contenedor_2').hide();
         
     })
+//** crud productos */
+function crud_productos(){
+  $.ajax({
+    url: '../../backend/crud_productos.php',
+    type: 'POST',      
+  })
+  .done(function(listas_productos){
+  var i = 1;  
+  var listas = JSON.parse(listas_productos);
+  var template='';
+  listas.forEach(lista =>{
+          template+= `
+          <tr elmentoid="${lista.id_producto}">                              
+             <td>${lista.cod_producto}</td>
+             <td>${lista.nombre_producto}</td>             
+             <td>${lista.cantidad}</td>            
+              
+          </tr>`;                
+          $('#listados_productos').html(template);
+         
+        });
+  /*$('#tot_plan').html(i);   
+  console.log (listas);
+  console.log (i);*/   
+  })
+  .fail(function(){
+    alert('Hubo un errror al cargar los usuarios');
+  });  
+
+}
+
     
 //*******FIN DE TODO******    
 })

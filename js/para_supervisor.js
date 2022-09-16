@@ -1,5 +1,6 @@
 jQuery(document).ready(function(){
     productos_categoria();
+    crud_productos();
     $('.contenedor_2').hide();
     $('.contenedor_categorias').hide();
     $('.contenedor_productos').hide();
@@ -12,7 +13,7 @@ jQuery(document).ready(function(){
         $('.contenedor_2').show();
         
 
-    });    
+    });     
 
     function editar_usuario(id_de_usuario){
         let id = id_de_usuario;
@@ -154,7 +155,80 @@ $.ajax({
   .fail(function(){
       alert ('hubo un error al cargar la lista de categorias de productos ');
   })
-    
+
+  $(document).on('click','#cat_product', function(){
+    var id_catporduc = $('#cat_product').val();   
+    $('#id_catproduct').val(id_catporduc);
+  }); 
+  $(document).on('click','#btn_new_produc',function(){
+    $('#ingreso_productos').modal('show');
+    date = new Date();
+    year = date.getFullYear();
+    month = date.getMonth() + 1;
+    day = date.getDate();    
+    document.getElementById("fecha_ingreso").value =year + "-" + month + "-" + day; 
+  });
+
+//** graba producto****/    
+$(document).on('click','#carga_producto_',function(e){
+  e.preventDefault();
+  var _formCargaP = $("#new_product");      
+  var datos = new FormData($("#new_product")[0]);                
+    $.ajax({
+        url: '../../backend/inserta_producto.php',
+        type: 'POST',
+        data: datos,
+        contentType: false,
+        processData: false,
+        success: function(datos)
+        {
+          alert(datos);
+          _formCargaP[0].reset();
+          $('#ingreso_productos').modal('hide');
+          crud_productos();
+  
+  
+        }
+
+       });
+})
+//** crud productos */
+function crud_productos(){
+  $.ajax({
+    url: '../../backend/crud_productos.php',
+    type: 'POST',      
+  })
+  .done(function(listas_productos){
+  var i = 1;  
+  var listas = JSON.parse(listas_productos);
+  var template='';
+  listas.forEach(lista =>{
+          template+= `
+          <tr elmentoid="${lista.id_producto}">                              
+             <td>${lista.cod_producto}</td>
+             <td>${lista.nombre_producto}</td>
+             <td>${lista.bodega}</td>
+             <td>${lista.cantidad}</td>
+             <td>${lista.precio_costo}</td>
+             <td>${lista.fecha_ingreso}</td>
+
+             <td> <i class='bx bx-edit-alt'id="editar_product"></i> &nbsp;
+                  <i class='bx bxs-user-x' id="borrar_product"></i> 
+             </td>   
+              
+          </tr>`;                
+          $('#listados_productos').html(template);
+         
+        });
+  /*$('#tot_plan').html(i);   
+  console.log (listas);
+  console.log (i);*/   
+  })
+  .fail(function(){
+    alert('Hubo un errror al cargar los usuarios');
+  });  
+
+}
 
 //*******FIN DE TODO******    
 })
