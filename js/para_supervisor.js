@@ -207,11 +207,7 @@ function crud_productos(){
           <tr elmentoid="${lista.id_producto}">                              
              <td>${lista.cod_producto}</td>
              <td>${lista.nombre_producto}</td>
-             <td>${lista.bodega}</td>
-             <td>${lista.cantidad}</td>
-             <td>${lista.precio_costo}</td>
-             <td>${lista.fecha_ingreso}</td>
-
+             <td>${lista.bodega}</td>              
              <td> <i class='bx bx-edit-alt'id="editar_product"></i> &nbsp;
                   <i class='bx bxs-user-x' id="borrar_product"></i> 
              </td>   

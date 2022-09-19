@@ -4,8 +4,8 @@
     $cod_produc =$_POST['cod_producto'];
     $nom_produc =$_POST['nom_producto'];
     $bodega =$_POST['bodega_num'];
-    $cantidad =$_POST['cantidad'];
-    $costo =$_POST['precio_costo'];
+    //$cantidad =$_POST['cantidad'];
+    //$costo =$_POST['precio_costo'];
     $fecha_ingreso=$_POST['fecha_ingreso'];
     
     require ("mi_conexion.php");
@@ -24,21 +24,17 @@
                id_procategoria,
                cod_producto,
                nombre_producto,
-               bodega,
-               cantidad,
-               precio_costo,
+               bodega,              
                fecha_ingreso
                              
-                )VALUES(?,?,?,?,?,?,?)";
+                )VALUES(?,?,?,?,?)";
 
     $resu =mysqli_prepare($conexion, $consulta);
-    $ok = mysqli_stmt_bind_param($resu,"sssssss",
+    $ok = mysqli_stmt_bind_param($resu,"sssss",
                         $id_prodCatego,
                         $cod_produc,
                         $nom_produc,
-                        $bodega,
-                        $cantidad,
-                        $costo,
+                        $bodega,                        
                         $fecha_ingreso
                         
                         );
