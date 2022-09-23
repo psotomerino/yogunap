@@ -7,41 +7,25 @@
     }
     include '../../templates/cortina.php';
     include '../../templates/header.html';
-    include '../../templates/footer.html';    
+    include '../../templates/footer.html'; 
+    
+       
 
 ?>
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="../../css/para_indexAdmin.css">
-<script src="../../js/para_indexAdmin.js" defer></script>
-<style>
-    .contenedor_1{
-        /*margin-top: 5px;
-        margin-left: 15px;*/
+<link rel="stylesheet" href="css/para_index.css">
+
+<!-- <style>
+    .formulario_reg{
+        margin-top: 20px;
+        color:black;
+    }
+    .contenedor_dash{
         width: 18%;
-        /*background-color: aqua;*/
         float: left;
     }
-    #menu_1{
-        display: inline;
-    }
-   .contenedor_2{
-        margin-top: 20px;
-        width: 40%;
-        float: left;
-        color: black;
-        
-    }
-    .contenedor_productos{
-        margin-top: 20px;
-        width: 80%;
-        float: left;
-        color: black; 
-    }
-    #mi_clave{
-        color: orangered;
-    }
-        
-</style>
+
+</style> -->
 <div class="contenedor">
     <div class="row">
        <div class="col-12">
@@ -49,76 +33,44 @@
        </div>
     </div>
 </div>
-<div class="contenedor_1">
-    <div class="menu-dashboard">
-    <!--   TOP MENU-->
-        <div class="top-menu">
-           <div class="toggle">
-                <i class='bx bx-menu'></i> 
-           </div><br>
-    <!--MENU-->
-           <div class="menu">
-              <div class="enlace" id="btn_yo">
-                <i class="bx bx-grid-alt"></i>
-                <span>Mi perfil</span>  
-              </div>
-              <div class="enlace" id="btn_inventario">
-                <i class='bx bxs-book'></i>
-                <span>Inventarios</span>  
-              </div>
-              <!--<div class="enlace" id="btn_registroU">
-                <i class='bx bx-user-plus'></i>
-                <span>Nuevo</span>  
-              </div>
-              <div class="enlace">
-                <i class='bx bxs-key'></i>
-                <span>Perfiles</span>  
-              </div>
-              <div class="enlace" id="salir">
-                <i class='bx bxs-log-out'></i>
-                <span>Salir</span> 
-              </div> -->  
-           </div>
+<div class="grid-container g-0">
+  <div class="grid-item" id="cliente_"><p><img src="../../imagenes/clientes.jpg" class="img_" alt=""></p><p>CLIENTES</p></div>
+  <div class="grid-item" id="product_"><p><img src="../../imagenes/yogurt.png" class="img_" alt=""></p><p>PRODUCTOS</p></div>
+  <div class=""></div>
+  <div class=""></div>
+  <div class=""></div>
+  <div class=""></div>
+  <div class=""></div>
 
-        </div>
-    </div>
 </div>
-<div class="contenedor_2">
-    <div class="table-responsive-md">
-        <table class="table">
-            <tr>
-                <td>Cédula</td>
-                <td id="yo_cedula"></td>
-            </tr>
-            <tr>
-                <td>Nombres</td>
-                <td id="yo_nombre"></td>
-            </tr>
-            <tr>
-                <td>Apellidos</td>
-                <td id="yo_apellido"></td>
-            </tr>
-            <tr>
-                <td>Fecha de nacimiento</td>
-                <td id="yo_fecha_naci"></td>
-            </tr>
-            <tr>
-                <td>Sexo</td>
-                <td id="yo_sexo"></td>
-            </tr>
-            <tr>
-                <td>Contacto</td>
-                <td id="yo_contacto"></td>
-            </tr>
-            <tr>
-                <td>Mail</td>
-                <td id="yo_mail"></td>
-            </tr>
-            <tr>
-                <td id="mi_clave">cambiar mi clave</td>
-                <td></td>
-            </tr>
+<div class="contenedor_clientes">
+<div class="col-md-4" id="categoria_clientes">
+            <!-- <p><b>FILTRAR POR CATEGORIA PRODUCTOS</b>
+            <select id="cat_product" name="cat_product" class="form-control">
+            </select></p> -->
+</div> 
+<div class="col-md-2">
+<button type="button" class="btn btn-success" id="btn_new_cliente" data-bs-toggle="modal" data-bs-target="#ingreso_clientes">Nuevo cliente </button> 
+
+</div>
+<br>
+<button type="button" id="regresar" class= "btn btn-primary mb-3 ml-3">Regresar</button>
+<br>
+<div class="col-10">
+    <table id="" class="table table-bordered table-hover table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Codigo</th>
+            <th>Nombres</th>            
+            <th>Direccion</th>
+            <th>Contacto</th>
+            <th>Acciones</th>
+        </tr>         
+       </thead>
+       <tbody id=""></tbody>
+       
         </table>
+        </div>
     </div>
 </div>
 <div class="contenedor_productos">
@@ -131,6 +83,8 @@
 <!-- <button type="button" class="btn btn-success" id="btn_new_produc" data-bs-toggle="" data-bs-target="#ingreso_productos">Nuevo producto </button> -->
 </div>
 <br>
+<button type="button" id="regresar" class= "btn btn-primary mb-3 ml-3">Regresar</button>
+<br>
 <div class="col-10">
     <table id="" class="table table-bordered table-hover table-striped">
     <thead class="thead-light">
@@ -138,6 +92,7 @@
             <th>Codigo</th>
             <th>Descripcion/Nombre</th>            
             <th>Cantidad</th>
+            <th>Acciones</th>
         </tr>         
        </thead>
        <tbody id="listados_productos"></tbody>
@@ -145,7 +100,38 @@
         </table>
         </div>
     </div>
-
-
 </div>
-<script src="../../js/para_bodega.js"></script>
+<!-- **** MODAL INGRESO CLIENTES *** -->
+<!-- Modal -->
+<div class="modal fade" id="ingreso_clientes" tabindex="-1" aria-labelledby="ingreso_clienteslLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ingreso_clientesabel">INGRESO NUEVO CLIENTE</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-control" id="new_cliente">
+            <input type="text" class="form-control mt-2"id="cod_cliente" name="cod_cliente" placeholder ="Código de cliente">
+            <input type="text" class="form-control mt-2 " id="cedula" name="cedula" placeholder ="cédula">
+            <br>
+            <div class="btn btn-info" id="val_cedula">validar cedula</div>
+            <input type="text" class="form-control mt-2" id="nombres" name="nombres" placeholder ="Nombres">
+            <input type="text" class="form-control mt-2" id="apellidos" name="apellidos" placeholder ="Apellidos"> 
+            <input type="text" class="form-control mt-2 " id="direccion" name="direccion" placeholder ="Dirección">
+            <input type="text" class="form-control mt-2 " id="telefono" name="telefono" placeholder ="Teléfono">
+            <input type="mail" class="form-control mt-2 " id="mail" name="mail" placeholder ="Correo Electrónico">
+            <!-- <input type="text" class="form-control mt-2 " id="estado" name="estado" placeholder ="Apellidos"> -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" id="carga_cliente_">INGRESAR CLIENTE</button> 
+      </div>
+      <p id="cedula_?"></p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../../js/para_supervisor.js"></script>
+<!-- Scrollable modal -->
+<script src="js/para_index.js"></script>
