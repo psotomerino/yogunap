@@ -112,21 +112,24 @@
       </div>
       <div class="modal-body">
         <form class="form-control" id="new_cliente">
-            <input type="text" class="form-control mt-2"id="cod_cliente" name="cod_cliente" placeholder ="Código de cliente">
             <input type="text" class="form-control mt-2 " id="cedula" name="cedula" placeholder ="cédula">
-            <br>
-            <div class="btn btn-info" id="val_cedula">validar cedula</div>
-            <input type="text" class="form-control mt-2" id="nombres" name="nombres" placeholder ="Nombres">
-            <input type="text" class="form-control mt-2" id="apellidos" name="apellidos" placeholder ="Apellidos"> 
-            <input type="text" class="form-control mt-2 " id="direccion" name="direccion" placeholder ="Dirección">
-            <input type="text" class="form-control mt-2 " id="telefono" name="telefono" placeholder ="Teléfono">
-            <input type="mail" class="form-control mt-2 " id="mail" name="mail" placeholder ="Correo Electrónico">
-            <!-- <input type="text" class="form-control mt-2 " id="estado" name="estado" placeholder ="Apellidos"> -->
+            <div class="btn btn-info mt-1" id="val_cedula">validar cedula</div><br>
+          <div class="continue_clienteform">
+            <input type="text" class="form-control mt-2"id="cod_cliente" name="cod_cliente" placeholder ="Código de cliente">
+              <input type="text" class="form-control mt-2" id="nombres" name="nombres" placeholder ="Nombres">
+              <input type="text" class="form-control mt-2" id="apellidos" name="apellidos" placeholder ="Apellidos"> 
+              <input type="text" class="form-control mt-2 " id="direccion" name="direccion" placeholder ="Dirección">
+              <input type="text" class="form-control mt-2 " id="telefono" name="telefono" placeholder ="Teléfono">
+              <input type="mail" class="form-control mt-2 " id="mail" name="mail" placeholder ="Correo Electrónico">
+              <!-- <input type="text" class="form-control mt-2 " id="estado" name="estado" placeholder ="Apellidos"> -->
+          </div>
         </form>
+
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" id="carga_cliente_">INGRESAR CLIENTE</button> 
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-secondary continue_clienteform" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success continue_clienteform" id="carga_cliente_">INGRESAR CLIENTE</button> 
+        
       </div>
       <p id="cedula_?"></p>
     </div>

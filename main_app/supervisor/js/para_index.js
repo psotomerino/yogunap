@@ -2,7 +2,8 @@ jQuery(document).ready(function(){
     productos_categoria();
     crud_productos(); 
     $('.contenedor_clientes').hide();
-    $('.contenedor_productos').hide(); 
+    $('.contenedor_productos').hide();
+    $('.continue_clienteform').hide(); 
     
      $(document).on('click','#btn_yo', function(){
         
@@ -239,36 +240,33 @@ function validar_cedula($identi) {
     //alert ($identi);
     if ($identi == ""){
         alert ("Revise.. la cedula etsa en blanco");
-    }else{
+    }else{    
+        var cad_ =  $identi;
+        var cad = $.trim(cad_);
+        var total = 0;
+        var longitud = cad.length;
+        var longcheck = longitud - 1;
 
-    
-    var cad = document.getElementById("cedula").value.trim();
-    //var cad =  ($identi).value.trim();
-    var total = 0;
-    var longitud = cad.length;
-    var longcheck = longitud - 1;
-
-    if (cad !== "" && longitud === 10){
-      for(i = 0; i < longcheck; i++){
-        if (i%2 === 0) {
-          var aux = cad.charAt(i) * 2;
-          if (aux > 9) aux -= 9;
-          total += aux;
-        } else {
-          total += parseInt(cad.charAt(i)); // parseInt o concatenará en lugar de sumar
+        if (cad !== "" && longitud === 10){
+          for(i = 0; i < longcheck; i++){
+            if (i%2 === 0) {
+              var aux = cad.charAt(i) * 2;
+              if (aux > 9) aux -= 9;
+               total += aux;
+            } else {
+              total += parseInt(cad.charAt(i)); // parseInt o concatenará en lugar de sumar
+            }
+          }
+          total = total % 10 ? 10 - total % 10 : 0;
+          if (cad.charAt(longitud-1) == total) {
+             alert ("Cedula Válida");
+             
+          }else{            
+            alert ("cedula invalida");
+          }
+        }else{
+          alert("Por favor ingreso 10 digitos correspondiente a la cédula")  
         }
-      }
-
-      total = total % 10 ? 10 - total % 10 : 0;
-
-       if (cad.charAt(longitud-1) == total) {
-        // document.getElementById("cedula_?").innerHTML = ("Cedula Válida");
-        alert ("Cedula Válida");
-      }else{
-        // document.getElementById("cedula_?").innerHTML = ("Cedula Inválida");
-        alert ("cedula invalida");
-       }
-     }
     }
   }
 
