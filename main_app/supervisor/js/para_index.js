@@ -1,6 +1,7 @@
 jQuery(document).ready(function(){
-    productos_categoria();
+    //productos_categoria();
     crud_productos(); 
+    crud_clientes();  
     $('.contenedor_clientes').hide();
     $('.contenedor_productos').hide();
     $('.continue_clienteform').hide(); 
@@ -97,133 +98,49 @@ jQuery(document).ready(function(){
         $identi = $('#cedula').val();   
         validar_cedula($identi);
     })
-//*** crear clientes */
+//***  boton crear clientes */
 $(document).on('click','#carga_cliente_',function(e){
-    e.preventDefault();    
-    //alert("Listoa para cargar clientes");
-    var _formP = $("#new_cliente");      
-    var datos = new FormData($("#new_cliente")[0]);                
-      $.ajax({
-         url: '../../backend/inserta_cliente.php',
-         type: 'POST',
-         data: datos,
-         contentType: false,
-         processData: false,
-         success: function(datos)
-         {
-           alert(datos);
-           //_formP[0].reset();
-           //productos_categoria();
-    
-         }
-
-         });
+    e.preventDefault();
+    codigo = $('#cod_cliente').val();
+    nombres = $('#nombres').val();
+    apellidos = $('#apellidos').val();
+    direccion = $('#direccion').val();
+    telefono = $('#telefono').val();
+    mail = $('#mail').val();
+    correo = $('#mail').val();
+    if ( codigo == ""){alert ("Falta ingresar codigo de cliente");exit();}
+    if ( nombres== ""){alert ("Falta ingresar Nombres del cliente");exit();}
+    if ( apellidos == ""){alert ("Falta ingresar Apellidos del cliente");exit();}
+    if ( direccion == ""){alert ("Falta ingresar Dirección del cliente");exit();}
+    if ( telefono == ""){alert ("Falta ingresar Telefono del cliente");exit();}
+    if ( mail == ""){alert ("Falta ingresar correo electronico del cliente");exit();}
+    validateEmail(correo);    
 })
-//**Crud categorias productos */
-function productos_categoria(){
-    $.ajax({
-      url: '../../backend/crud_catproducts.php',
-      type: 'POST',      
-    })
-    .done(function(listas_products_catego){
-    var i = 1;  
-    var listas = JSON.parse(listas_products_catego);
-    var template='';
-    listas.forEach(lista =>{
-            template+= `
-            <tr elmentoid="${lista.id_catproduct}">
-
-               <td>${i++}</td>                   
-               <td>${lista.nombre_categ}</td>
-               <td> <i class='bx bx-edit-alt'id="editar_usu"></i> &nbsp;
-                    <i class='bx bxs-user-x' id="borrar_usu"></i> 
-               </td>   
-                
-            </tr>`;                
-            $('#listados_categoria').html(template);
-           
-          });
-    /*$('#tot_plan').html(i);   
-    console.log (listas);
-    console.log (i);*/   
-    })
-    .fail(function(){
-      alert('Hubo un errror al cargar los usuarios');
-    });  
-
-}
-//***** Cargar categoirias productos********
-$.ajax({
-  type: 'POST',
-  url: '../../backend/carga_catproducts.php',
-  })
-  .done(function(listas_categorias_product){
-      //alert (listas_materias);  
-      $('#cat_product').html(listas_categorias_product); 
-      
-  })
-  .fail(function(){
-      alert ('hubo un error al cargar la lista de categorias de productos ');
-  })
-
-  $(document).on('click','#cat_product', function(){
-    var id_catporduc = $('#cat_product').val();   
-    $('#id_catproduct').val(id_catporduc);
-  }); 
-  $(document).on('click','#btn_new_produc',function(){
-    $('#ingreso_productos').modal('show');
-    date = new Date();
-    year = date.getFullYear();
-    month = date.getMonth() + 1;
-    day = date.getDate();    
-    document.getElementById("fecha_ingreso").value =year + "-" + month + "-" + day; 
-  });
-
-//** graba producto****/    
-$(document).on('click','#carga_producto_',function(e){
-  e.preventDefault();
-  var _formCargaP = $("#new_product");      
-  var datos = new FormData($("#new_product")[0]);                
-    $.ajax({
-        url: '../../backend/inserta_producto.php',
-        type: 'POST',
-        data: datos,
-        contentType: false,
-        processData: false,
-        success: function(datos)
-        {
-          alert(datos);
-          _formCargaP[0].reset();
-          $('#ingreso_productos').modal('hide');
-          crud_productos();
-  
-  
-        }
-
-       });
-})
-//** crud productos */
-function crud_productos(){
+//** crud clientes */
+function crud_clientes(){
   $.ajax({
-    url: '../../backend/crud_productos.php',
+    url: '../../backend/crud_clientes.php',
     type: 'POST',      
   })
-  .done(function(listas_productos){
+  .done(function(listas_clientes){
   var i = 1;  
-  var listas = JSON.parse(listas_productos);
+  var listas = JSON.parse(listas_clientes);
   var template='';
   listas.forEach(lista =>{
           template+= `
-          <tr elmentoid="${lista.id_producto}">                              
-             <td>${lista.cod_producto}</td>
-             <td>${lista.nombre_producto}</td>
-             <td>${lista.bodega}</td>              
-             <td> <i class='bx bx-edit-alt'id="editar_product"></i> &nbsp;
-                  <i class='bx bxs-user-x' id="borrar_product"></i> 
+          <tr elmentoid="${lista.id_cliente}">                              
+             <td>${lista.cliente_codigo}</td>
+             <td>${lista.cedula} </td>
+             <td>${lista.nombres} &nbsp ${lista.apellidos}</td>             
+             <td>${lista.direccion}</td>
+             <td>${lista.telefono}</td>
+             <td>${lista.mail}</td>              
+             <td> <i class='bx bx-edit-alt'id="editar_cliente"></i> &nbsp;
+                  <i class='bx bxs-user-x' id="borrar_cliente"></i> 
              </td>   
               
           </tr>`;                
-          $('#listados_productos').html(template);
+          $('#lista_clientes').html(template);
          
         });
   /*$('#tot_plan').html(i);   
@@ -239,7 +156,7 @@ function crud_productos(){
 function validar_cedula($identi) {
     //alert ($identi);
     if ($identi == ""){
-        alert ("Revise.. la cedula etsa en blanco");
+        alert ("Revise.. no puede estar el campo cédula en blanco");
     }else{    
         var cad_ =  $identi;
         var cad = $.trim(cad_);
@@ -259,7 +176,7 @@ function validar_cedula($identi) {
           }
           total = total % 10 ? 10 - total % 10 : 0;
           if (cad.charAt(longitud-1) == total) {
-             alert ("Cedula Válida");
+             //alert ("Cedula Válida");
              busca_cliente($identi);
           }else{            
             alert ("cedula invalida");
@@ -284,8 +201,9 @@ function busca_cliente(cad){
             //alert (jsonData.success);
             if (jsonData.success == "1"){
               alert ("este cliente ya se encuentra registrado");
+              exit();
             }else{
-              alert ("vamos a añadri este nuevo cliente");
+              //alert ("vamos a añadri este nuevo cliente");
               $('.continue_clienteform').show(); 
             }
 
@@ -293,5 +211,84 @@ function busca_cliente(cad){
           }    
         });  
    }
+//**** validacion correo electronico */
+function validateEmail(correo){ 
+  var expReg= /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+  var esValido = expReg.test(correo);
+  if (esValido == true){
+    var _formP = $("#new_cliente");      
+    var datos = new FormData($("#new_cliente")[0]);                
+      $.ajax({
+         url: '../../backend/inserta_cliente.php',
+         type: 'POST',
+         data: datos,
+         contentType: false,
+         processData: false,
+         success: function(datos)
+         {
+           alert(datos);
+           _formP[0].reset();
+           crud_clientes(); 
+           $('.continue_clienteform').hide();   
+         }
+         });
+  }else{
+    alert (" El correo ingregrado no es válido por favor revisar.");
+    
+    }
+  }
+//** crud productos */
+function crud_productos(){
+  $.ajax({
+    url: '../../backend/crud_productos.php',
+    type: 'POST',      
+  })
+  .done(function(listas_productos){
+  var i = 1;  
+  var listas = JSON.parse(listas_productos);
+  var template='';
+  listas.forEach(lista =>{
+          template+= `
+          <tr elmentoid="${lista.id_producto}">                              
+             <td>${lista.cod_producto}</td>
+             <td>${lista.nombre_producto}</td>             
+             <td>${lista.cantidad}</td>            
+              
+          </tr>`;                
+          $('#listados_productos').html(template);
+         
+        });
+  /*$('#tot_plan').html(i);   
+  console.log (listas);
+  console.log (i);*/   
+  })
+  .fail(function(){
+    alert('Hubo un errror al cargar los productos');
+  });  
+
+}
+//********* ELIMINA CLIENTE **********
+$(document).on('click','#borrar_cliente',function(){
+  let elemento = $(this)[0].parentElement.parentElement;
+  let id_de_cliente = $(elemento).attr('elmentoid');
+  //alert (id_de_cliente);  
+  elimina_usuario(id_de_cliente); 
+});
+
+function elimina_usuario(id_de_cliente){
+let id = id_de_cliente;
+var id_envio ={"id_envio":id}; 
+alert ('desea eliminar este cliente definitivamente');
+  $.ajax({
+    url: '../../backend/eliminar_cliente.php',
+    type: 'POST',
+    data: id_envio,
+    success: function (respuesta)
+      {
+      alert (respuesta);
+      crud_clientes(); 
+      }
+      });  
+}
 //*******FIN DE TODO******    
 })

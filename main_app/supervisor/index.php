@@ -56,18 +56,20 @@
 <br>
 <button type="button" id="regresar" class= "btn btn-primary mb-3 ml-3">Regresar</button>
 <br>
-<div class="col-10">
+<div class="col-12">
     <table id="" class="table table-bordered table-hover table-striped">
     <thead class="thead-light">
         <tr>
             <th>Codigo</th>
+            <th>Cedula</th>
             <th>Nombres</th>            
             <th>Direccion</th>
             <th>Contacto</th>
+            <th>Correo</th>
             <th>Acciones</th>
         </tr>         
        </thead>
-       <tbody id=""></tbody>
+       <tbody id="lista_clientes"></tbody>
        
         </table>
         </div>
@@ -116,11 +118,11 @@
             <div class="btn btn-info mt-1" id="val_cedula">validar cedula</div><br>
           <div class="continue_clienteform">
             <input type="text" class="form-control mt-2"id="cod_cliente" name="cod_cliente" placeholder ="Código de cliente" required>
-              <input type="text" onkeypress="return soloLetras(event)" class="form-control mt-2" id="nombres" name="nombres" placeholder ="Nombres" required>
-              <input type="text" class="form-control mt-2" id="apellidos" name="apellidos" placeholder ="Apellidos" required> 
-              <input type="text" class="form-control mt-2 " id="direccion" name="direccion" placeholder ="Dirección" required>
-              <input type="text" class="form-control mt-2 " id="telefono" name="telefono" placeholder ="Teléfono" required>
-              <input type="mail" class="form-control mt-2 " id="mail" name="mail" placeholder ="Correo Electrónico" required>
+              <input type="text" onkeypress="return soloLetras(event)" class="form-control mt-2" id="nombres" name="nombres" placeholder ="Nombres">
+              <input type="text" onkeypress="return soloLetras(event)" class="form-control mt-2" id="apellidos" name="apellidos" placeholder ="Apellidos"> 
+              <input type="text" class="form-control mt-2 " id="direccion" name="direccion" placeholder ="Dirección">
+              <input type="text" onkeypress="return solonumeros(event)" class="form-control mt-2 " id="telefono" name="telefono" placeholder ="Teléfono">
+              <input type="mail" class="form-control mt-2 " id="mail" name="mail" placeholder ="Correo Electrónico">
               <!-- <input type="text" class="form-control mt-2 " id="estado" name="estado" placeholder ="Apellidos"> -->
           </div>
         </form>
@@ -156,5 +158,23 @@
     if (letras.indexOf(tecla) == -1 && !tecla_especial) {
       return false;
     }
-  }
+  }  
+  function solonumeros(e) {
+    var key = e.keyCode || e.which,
+      tecla = String.fromCharCode(key).toLowerCase(),
+      letras = " 0123456789",
+      especiales = [8, 37, 39, 46],
+      tecla_especial = false;
+
+    for (var i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = true;
+        break;
+      }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+      return false;
+    }
+  } 
 </script>

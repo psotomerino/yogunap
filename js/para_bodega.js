@@ -85,7 +85,7 @@ function crud_productos(){
   console.log (i);*/   
   })
   .fail(function(){
-    alert('Hubo un errror al cargar los usuarios');
+    alert('Hubo un errror al cargar los productos');
   });  
 
 }
