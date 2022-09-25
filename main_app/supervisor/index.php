@@ -115,16 +115,16 @@
             <input type="text" class="form-control mt-2 " id="cedula" name="cedula" placeholder ="cédula">
             <div class="btn btn-info mt-1" id="val_cedula">validar cedula</div><br>
           <div class="continue_clienteform">
-            <input type="text" class="form-control mt-2"id="cod_cliente" name="cod_cliente" placeholder ="Código de cliente">
-              <input type="text" class="form-control mt-2" id="nombres" name="nombres" placeholder ="Nombres">
-              <input type="text" class="form-control mt-2" id="apellidos" name="apellidos" placeholder ="Apellidos"> 
-              <input type="text" class="form-control mt-2 " id="direccion" name="direccion" placeholder ="Dirección">
-              <input type="text" class="form-control mt-2 " id="telefono" name="telefono" placeholder ="Teléfono">
-              <input type="mail" class="form-control mt-2 " id="mail" name="mail" placeholder ="Correo Electrónico">
+            <input type="text" class="form-control mt-2"id="cod_cliente" name="cod_cliente" placeholder ="Código de cliente" required>
+              <input type="text" onkeypress="return soloLetras(event)" class="form-control mt-2" id="nombres" name="nombres" placeholder ="Nombres" required>
+              <input type="text" class="form-control mt-2" id="apellidos" name="apellidos" placeholder ="Apellidos" required> 
+              <input type="text" class="form-control mt-2 " id="direccion" name="direccion" placeholder ="Dirección" required>
+              <input type="text" class="form-control mt-2 " id="telefono" name="telefono" placeholder ="Teléfono" required>
+              <input type="mail" class="form-control mt-2 " id="mail" name="mail" placeholder ="Correo Electrónico" required>
               <!-- <input type="text" class="form-control mt-2 " id="estado" name="estado" placeholder ="Apellidos"> -->
           </div>
         </form>
-
+        
       </div>
       <div class="modal-footer">        
         <button type="button" class="btn btn-secondary continue_clienteform" data-bs-dismiss="modal">Close</button>
@@ -138,3 +138,23 @@
 <script type="text/javascript" src="../../js/para_supervisor.js"></script>
 <!-- Scrollable modal -->
 <script src="js/para_index.js"></script>
+<script>
+  function soloLetras(e) {
+    var key = e.keyCode || e.which,
+      tecla = String.fromCharCode(key).toLowerCase(),
+      letras = " áéíóúabcdefghijklmnñopqrstuvwxyz",
+      especiales = [8, 37, 39, 46],
+      tecla_especial = false;
+
+    for (var i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = true;
+        break;
+      }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+      return false;
+    }
+  }
+</script>

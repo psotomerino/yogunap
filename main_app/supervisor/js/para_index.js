@@ -260,7 +260,7 @@ function validar_cedula($identi) {
           total = total % 10 ? 10 - total % 10 : 0;
           if (cad.charAt(longitud-1) == total) {
              alert ("Cedula Válida");
-             
+             busca_cliente($identi);
           }else{            
             alert ("cedula invalida");
           }
@@ -270,5 +270,28 @@ function validar_cedula($identi) {
     }
   }
 
+//***** busca cliente ****
+function busca_cliente(cad){
+  var cedula= cad;  
+  var id_envio ={"id_envio":cedula};     
+  $.ajax({
+          url: '../../backend/busca_cliente.php',
+          type: 'POST',
+          data: id_envio,  
+          success: function (cliente_)
+          {
+            var jsonData = JSON.parse(cliente_);
+            //alert (jsonData.success);
+            if (jsonData.success == "1"){
+              alert ("este cliente ya se encuentra registrado");
+            }else{
+              alert ("vamos a añadri este nuevo cliente");
+              $('.continue_clienteform').show(); 
+            }
+
+                    
+          }    
+        });  
+   }
 //*******FIN DE TODO******    
 })
