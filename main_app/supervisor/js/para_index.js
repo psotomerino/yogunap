@@ -135,8 +135,7 @@ function crud_clientes(){
              <td>${lista.direccion}</td>
              <td>${lista.telefono}</td>
              <td>${lista.mail}</td>              
-             <td> <i class='bx bx-edit-alt'id="editar_cliente"></i> &nbsp;
-                  <i class='bx bxs-user-x' id="borrar_cliente"></i> 
+             <td> <i class='bx bxs-user-x' id="borrar_cliente"></i> 
              </td>   
               
           </tr>`;                
