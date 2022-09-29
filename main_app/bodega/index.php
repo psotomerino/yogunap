@@ -43,6 +43,7 @@
 
 </div>
 <div class="contenedor_categorias">
+
     <div class="row mt-3">
         <div class="col-10">
         <table id="" class="table table-bordered table-hover table-striped">
@@ -62,26 +63,24 @@
     <hr>
     <div class="row mt-2 ml-3">
         <div><h4><b>Crear Categorias</b></h4><br></div>
-    </div>  
-    <div class="row  ml-3">
-        <form role="form" id="form_categoria">
-        <div class="form-group">
-            <b>Nombre de la categoria</b><input required type="text" class="form-control" id="nom_cat" name="nom_cat">
-            <button type="submit" class="btn btn-primary mt-1" id="crea_cat">Crear Categoria</button>
-        </div>     
-        </form> 
-               
-    </div>
+    </div>      
 </div>
 <div class="contenedor_productos">
-<div class="col-md-4" id="categoria_productos">
-            <!-- <p><b>FILTRAR POR CATEGORIA PRODUCTOS</b>
-            <select id="cat_product" name="cat_product" class="form-control">
-            </select></p> -->
-</div> 
-<div class="col-md-2">
-<button type="button" class="btn btn-success" id="btn_new_produc" data-bs-toggle="" data-bs-target="#ingreso_productos">Nuevo producto </button>
-</div>
+
+<div class="row mt-3">
+    <div class="col-md-2">
+        <button type="button" id="regresar" class= "btn btn-primary mb-3 ml-3">Regresar</button>   
+    </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-success" id="btn_new_produc" data-bs-toggle="" data-bs-target="#ingreso_productos">Nuevo producto </button>
+        <button type="button" class="btn btn-info" id="btn_new_categoria" data-bs-toggle="modal" data-bs-target="#ingreso_categorias">Nuevo categoria </button>
+    </div> 
+    <div class="col-md-3" id="categoria_productos">
+      <select id="cat_product" name="cat_product" class="form-control"></select>
+    </div> 
+    
+</div>   
+
 <br>
 <div class="col-10">
     <table id="" class="table table-bordered table-hover table-striped">
@@ -89,7 +88,9 @@
         <tr>
             <th>Codigo</th>
             <th>Descripcion/Nombre</th>
-            <th>Bodega</th>                     
+            <th>Existencias</th> 
+            <th>Precio Costo</th>  
+            <th>Precio Venta</th>                  
             <th>Acciones</th>
 
         </tr>         
@@ -108,7 +109,7 @@
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ingreso_productosLabel">INGRESO NUEVO PRODUCTO</h5>
+        <h5 class="modal-title" id="ingreso_productosLabel">INGRESO NUEVO CATEGORIA</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -134,5 +135,29 @@
     </div>
   </div>
 </div>
-<script src="js/para_index.js"></script>
 <!-- Scrollable modal -->
+<!-- **** MODAL INGRESO CATEGORIAS *** -->
+<!-- Modal -->
+<div class="modal fade" id="ingreso_categorias" tabindex="-1" aria-labelledby="ingreso_categoriaslLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ingreso_categoriasLabel">INGRESO NUEVO PRODUCTO</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">  
+        <form role="form" id="form_categoria">
+        <div class="form-group">
+            <b>Nombre de la categoria</b><input required type="text" class="form-control" id="nom_cat" name="nom_cat">
+            <button type="submit" class="btn btn-primary mt-1" id="crea_cat">Crear Categoria</button>
+        </div>     
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Scrollable modal -->
+<script src="js/para_index.js"></script>

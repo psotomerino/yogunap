@@ -7,6 +7,7 @@
     $direccion=$_POST['direccion'];
     $telefono=$_POST['telefono'];
     $mail=$_POST['mail'];
+    $estado=$_POST['estado'];
       
     require ("mi_conexion.php");
     $conexion=mysqli_connect($db_host, $db_usuario, $db_contra);
@@ -24,18 +25,20 @@
                 apellidos, 
                 direccion, 
                 telefono, 
-                mail                           
-                )VALUES(?,?,?,?,?,?,?)";
+                mail,
+                estado                           
+                )VALUES(?,?,?,?,?,?,?,?)";
 
     $resu =mysqli_prepare($conexion, $consulta);
-    $ok = mysqli_stmt_bind_param($resu,"sssssss",
+    $ok = mysqli_stmt_bind_param($resu,"ssssssss",
                     $codigo,
                     $cedula,
                     $nombre,
                     $apellido,
                     $direccion,
                     $telefono,
-                    $mail
+                    $mail,
+                    $estado
                     );
     
     $ok = mysqli_stmt_execute($resu);

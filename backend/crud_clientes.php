@@ -15,7 +15,9 @@ function get_clientes(){
           'apellidos' =>$fila['apellidos'], 
           'direccion' =>$fila['direccion'], 
           'telefono' =>$fila['telefono'], 
-          'mail' =>$fila['mail']                 
+          'mail' =>$fila['mail'],
+          'estado' =>$fila['estado']
+
         );
     }
     $jsonstring = json_encode($json);   

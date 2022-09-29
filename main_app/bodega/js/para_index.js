@@ -1,23 +1,20 @@
 jQuery(document).ready(function(){
 
-    $('.contenedor_2').hide();
-    //$('.contenedor_productos').hide();
+    //$('.contenedor_2').hide();
+    $('.contenedor_productos').hide();
+    $('.contenedor_categorias').hide();
     crud_productos();
     
-     $(document).on('click','#btn_yo', function(){
-        
-        var id_de_usuario = $('#este_usuario').val();
-        editar_usuario(id_de_usuario);
-        //alert (id_de_usuario); 
-        $('.contenedor_2').show();
-        
-
-    });    
+    //  $(document).on('click','#btn_yo', function(){        
+    //     var id_de_usuario = $('#este_usuario').val();
+    //     editar_usuario(id_de_usuario);
+    //     //alert (id_de_usuario); 
+    //     $('.contenedor_2').show();
+    // });    
 
     function editar_usuario(id_de_usuario){
         let id = id_de_usuario;
-        var id_envio ={"id_envio":id};     
-            
+        var id_envio ={"id_envio":id};             
         $.ajax({
           url: '../../backend/editar_usuario.php',
           type: 'POST',
@@ -55,10 +52,16 @@ jQuery(document).ready(function(){
         });  
    }
     
-    $(document).on('click','#btn_inventario', function(){
-        $('.contenedor_2').hide();
+    $(document).on('click','#product_', function(){
+      $('.contenedor_productos').show();
+      $('.grid-container').hide();
         
     })
+    $(document).on('click','#regresar', function(){        
+      $('.grid-container').show();
+      $('.contenedor_productos').hide();
+      
+   })
 //** crud productos */
 function crud_productos(){
   $.ajax({
@@ -89,6 +92,41 @@ function crud_productos(){
   });  
 
 }
+//** CARGA LISTA DE CATEGORIAS */
+$.ajax({
+  type: 'POST',
+  url: '../../backend/listado_categorias.php',
+  })
+  .done(function(listas_categorias){
+      $('#cat_product').html(listas_categorias); 
+      
+  })
+  .fail(function(){
+      alert ('hubo un error al cargar la lista de categorias ');
+  })
+  //** INSERTA CATEGORIAS PRODUCTOS */
+  $(document).on('click','#crea_cat',function(e){
+    e.preventDefault();
+    nom_cad = $('#nom_cat').val();    
+    if ( nom_cad == ""){alert ("Antes de guardar categoria asegurese de haber escrito un nombre");exit();}
+    var _formP = $("#form_categoria");      
+    var datos = new FormData($("#form_categoria")[0]);                
+      $.ajax({
+         url: '../../backend/inserta_catergoria_produc.php',
+         type: 'POST',
+         data: datos,
+         contentType: false,
+         processData: false,
+         success: function(datos)
+         {
+           alert(datos);
+           _formP[0].reset();
+           crud_productos();
+         }
+         });  
+    
+})
+
 
     
 //*******FIN DE TODO******    

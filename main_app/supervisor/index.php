@@ -66,6 +66,7 @@
             <th>Direccion</th>
             <th>Contacto</th>
             <th>Correo</th>
+            <th>Estado</th>
             <th>Acciones</th>
         </tr>         
        </thead>
@@ -123,7 +124,10 @@
               <input type="text" class="form-control mt-2 " id="direccion" name="direccion" placeholder ="Dirección">
               <input type="text" onkeypress="return solonumeros(event)" class="form-control mt-2 " id="telefono" name="telefono" placeholder ="Teléfono">
               <input type="mail" class="form-control mt-2 " id="mail" name="mail" placeholder ="Correo Electrónico">
-              <!-- <input type="text" class="form-control mt-2 " id="estado" name="estado" placeholder ="Apellidos"> -->
+              <select name="estado" id="estado" class="form-control mt-2 ">
+                <option value="Cliente">Cliente</option>
+                <option value="Proveedor">Proveedor</option>
+              </select>
           </div>
         </form>
         
