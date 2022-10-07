@@ -1,9 +1,8 @@
 jQuery(document).ready(function(){
 
-    //$('.contenedor_2').hide();
     $('.contenedor_productos').hide();
     $('.contenedor_categorias').hide();
-    crud_productos();
+    //crud_productos();
     esta_fecha();
     
     //  $(document).on('click','#btn_yo', function(){        
@@ -93,12 +92,54 @@ function crud_productos(){
              <td> <i class="fa-light fa-octagon-plus"></i>/ <i class='bx bxs-user-x' id="borrar_producto"></i>         
              
           </tr>`;                
-          $('#listados_productos').html(template);
+          // $('#listados_productos').html(template);
          
         });
   /*$('#tot_plan').html(i);   
   console.log (listas);
   console.log (i);*/   
+  })
+  .fail(function(){
+    alert('Hubo un errror al cargar los productos');
+  });  
+
+}
+//** CRUD PRODUCTOS POR CATEGORIA */
+function crud_productos_categoria(id_cat_prouct_form){
+  let id_cate = id_cat_prouct_form;
+  var id_envio ={"id_envio":id_cate}; 
+  $.ajax({
+    url: '../../backend/crud_productos_categoria.php',
+    type: 'POST',
+    data: id_envio,      
+  })
+  .done(function(listas_productos_catego){
+  var i = 1;   
+  var listas = JSON.parse(listas_productos_catego);
+  //alert (listas); 
+  if(listas == ""){
+    $('#listados_productos').html("");
+    alert ("No hay existencias para esta categoria");    
+    exit();
+  }
+  var template='';
+  listas.forEach(lista =>{
+          template+= `
+          <tr elmentoid="${lista.id_producto}">                              
+             <td>${lista.cod_producto}</td>
+             <td>${lista.nomb_catego}</td> 
+             <td>${lista.nombre_producto}</td>  
+             <td>${lista.cantidad}</td>           
+             <td>${lista.unidad}</td>  
+             <td>${lista.stock_min}</td>
+             <td>${lista.precio_costo}</td> 
+             <td> <span class="badge badge-success" id="btn_stock_mas" data-bs-toggle="modal" data-bs-target="#stock_mas">cargar stock </span> / <i class='bx bxs-user-x' id="borrar_producto"></i>         
+             
+          </tr>`;                
+          $('#listados_productos').html(template);
+         
+        });
+
   })
   .fail(function(){
     alert('Hubo un errror al cargar los productos');
@@ -124,7 +165,16 @@ $.ajax({
     //alert (id_cat_prouct);id_catproduct
     $('#id_catproduct').val(id_cat_prouct);
        
-})    
+  })    
+
+  $('#cat_product_form').on('change', function(){
+    var id_cat_prouct_form = $('#cat_product_form').val();
+    //alert (id_cat_prouct_form);
+    crud_productos_categoria(id_cat_prouct_form);
+
+    
+       
+  })
   //** INSERTA CATEGORIAS PRODUCTOS */ 
   $(document).on('click','#crea_cat',function(e){
     e.preventDefault();
@@ -154,10 +204,12 @@ $(document).on('click','#carga_producto_',function(e){
   nombre_pro = $('#nom_producto').val();
   cantidad_pro = $('#cantidad').val();
   precio_pro = $('#precio_costo').val(); 
+  stock_min = $('#stock_min').val();
   if ( codigo_pro == ""){alert ("Antes de guardar el producto asegurese de haber escrito un codigo de producto");exit();} 
   if ( nombre_pro == ""){alert ("Antes de guardar el producto asegurese de haber escrito un nombre de producto");exit();} 
   if ( cantidad_pro == ""){alert ("Antes de guardar el producto asegurese de haber escrito un cantidad");exit();} 
   if ( precio_pro == ""){alert ("Antes de guardar el producto asegurese de haber escrito un precio");exit();} 
+  if ( stock_min == ""){alert ("Antes de guardar el producto asegurese de haber ingresado el stock de seguridad");exit();} 
   var _formP = $("#new_product");      
   var datos = new FormData($("#new_product")[0]); 
   $.ajax({
@@ -175,6 +227,50 @@ $(document).on('click','#carga_producto_',function(e){
     }
     });
 })
+
+//********* PARA INCREMENTAR STOCK SOLO PRODUCTO **********
+$(document).on('click','#btn_stock_mas',function(){
+  let elemento = $(this)[0].parentElement.parentElement;
+  let id_de_producto = $(elemento).attr('elmentoid');
+  //alert (id_de_producto);  
+  solo_producto(id_de_producto); 
+});
+
+//****SOLO UN PRODUCTO */
+function solo_producto(id_de_producto){
+  let id_producto = id_de_producto;
+  var id_envio ={"id_envio":id_producto};             
+  $.ajax({
+    url: '../../backend/solo_producto.php',
+    type: 'POST',
+    data: id_envio,
+    beforeSend: function(){
+                  /*document.getElementById("loading_full").style.display="block";
+                  document.getElementById("loading_full").innerHTML="<img id='img_lo' src='../../imagenes/loding_1.gif' width='300' height='300'>"; */
+                  $('.contenedor_3').hide();
+                   $('.contenedor_4').show();
+                  
+              },   
+      success: function (solo_producto){
+      console.log (solo_producto);
+      const producto = JSON.parse(solo_producto);
+      // 'id_producto'=> $fila['id_producto'],    
+      // 'cod_producto' => $fila['cod_producto'],       
+      // 'nombre_producto' => $fila['nombre_producto'],
+      // 'unidad'=> $fila['unidad'],
+      // 'cantidad'=> $fila['cantidad'],
+      // 'stock_min' => $fila['stock_min'],
+      // 'precio_costo' => $fila['precio_costo'],
+      // 'fecha_ingreso' => $fila['fecha_ingreso']   
+      $('#nombre_producto').val(producto.nombre_producto);
+      $('#existencia').val(producto.cantidad);
+      $('#existencia_seguridad').val(producto.stock_min); 
+      
+    }    
+  }); 
+
+
+}
     
 //*******FIN DE TODO******    
 })

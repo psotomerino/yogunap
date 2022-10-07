@@ -5,6 +5,7 @@
     $nom_produc =$_POST['nom_producto'];
     $unidad =$_POST['unidad'];
     $cantidad =$_POST['cantidad'];
+    $stock_min =$_POST['stock_min'];    
     $costo =$_POST['precio_costo'];
     $fecha_ingreso=$_POST['fecha_ingreso'];
     
@@ -26,17 +27,19 @@
                nombre_producto,
                unidad,  
                cantidad,
+               stock_min,
                precio_costo,            
                fecha_ingreso                             
-                )VALUES(?,?,?,?,?,?,?)";
+                )VALUES(?,?,?,?,?,?,?,?)";
 
     $resu =mysqli_prepare($conexion, $consulta);
-    $ok = mysqli_stmt_bind_param($resu,"sssssss",
+    $ok = mysqli_stmt_bind_param($resu,"ssssssss",
                         $id_prodCatego,
                         $cod_produc,
                         $nom_produc,
                         $unidad,
                         $cantidad,
+                        $stock_min,
                         $costo,
                         $fecha_ingreso
                         

@@ -84,6 +84,7 @@
             <th>Descripcion/Nombre</th>
             <th>Existencias</th> 
             <th>Unidad</th> 
+            <th>Stcok/seguridad</th>
             <th>Precio Costo</th>                
             <th>Acciones</th>
 
@@ -118,6 +119,7 @@
                 <option value="Gln">Galones</option>
             </select>
             <input type="number" class="form-control mt-2" id="cantidad" name="cantidad" placeholder ="cantidad">
+            <input type="number" class="form-control mt-2" id="stock_min" name="stock_min" placeholder ="stock_minimo">
             <input type="number" class="form-control mt-2" id="precio_costo" name="precio_costo" placeholder ="precio_costo"> 
             <input type="text" class="form-control mt-2 " id="fecha_ingreso" name="fecha_ingreso" readonly >
         </form>
@@ -149,6 +151,37 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>       
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Scrollable modal -->
+<!-- **** INGRESAR STOCK  *** -->
+<!-- Modal -->
+<div class="modal fade" id="stock_mas" tabindex="-1" aria-labelledby="stock_masLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="stock_masLabel">AUMENTAR STOCK</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">  
+        <p><b id="nombre_producto"></b></p>
+        <form role="form" id="stock_+">
+        <div class="form-group">
+            <b>Existencia Actual</b><input required type="text" class="form-control" id="existencia" name="existencia" readonly>
+            <b>Stock de seguridad</b><input required type="text" class="form-control" id="existencia_seguridad" name="existencia_seguridad" readonly>
+            <b>Cantidad a ingresar</b><input required type="text" class="form-control" id="existencia_nueva" name="existencia_nueva">
+            <b>Total Existencias</b><input required type="text" class="form-control" id="existencia_total" name="existencia_total" readonly>
+            <button type="text" class="btn btn-info mt-1" id="existencia_sumar">Calcular</button> 
+            <!-- <button type="submit" class="btn btn-primary mt-1" id="stock_m">Cargar Stock</button>  -->
+        </form>
+        </div>   
+         
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
+         
       </div>
     </div>
   </div>
